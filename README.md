@@ -25,3 +25,6 @@ ggplot2::ggplot() + geom_euler(carset)
 ```
 
 <img src="readme_files/venn3_normal.png"/>
+
+You can change all the usual ggplot parameters and add additional layers. You can also change the position of the venn diagram with the xlim and ylim arguements.
+Note, that by default, geom_euler will force the graph to be a square. If you don't want that, specify fixedCoords=FALSE.
