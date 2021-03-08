@@ -29,3 +29,11 @@ ggplot2::ggplot() + geom_euler(carset) +
 
 You can change all the usual ggplot parameters and add additional layers. You can also change the position of the venn diagram with the xlim and ylim arguements.
 Note, that by default, geom_euler will force the graph to be a square. If you don't want that, specify fixedCoords=FALSE.
+
+Modifying the colors is done in the same way you would do normally:
+``` r
+ggplot() + geom_euler(setlist[1:3]) +
+  scale_fill_manual(values=c("red","blue","yellow")) +
+  theme_void()
+```
+<img src="readme_files/venn3_fill.png"/>
