@@ -62,7 +62,7 @@ geom_euler <- function(setlist, textsize=4, xlim=c(0,1), ylim=c(0,1), fillCol=TR
   venn <- c(venn, numbers)
   ratio <- abs(diff(xlim)/diff(ylim))
   ratio <- ifelse(length(setlist)==2, ratio/1.5, ifelse(length(setlist)==4, ratio/1.2, ratio))
-  if(fixedCoords) venn <- c(venn, ggplot2::coord_fixed(abs(diff(xlim)/diff(ylim))))
+  if(fixedCoords) venn <- c(venn, ggplot2::coord_fixed(ratio))
 
   return(venn)
 }
