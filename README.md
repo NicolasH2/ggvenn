@@ -9,7 +9,7 @@ devtools::install_github("solatar/ggeuler")
 ```
 
 # Create a venn diagram
-Load the package, create your survival plot:
+Load the package, create your venn diagrams. ggeuler can create venn diagrams with up to 5 sets.
 ``` r
 library(ggeuler)
 library(ggplot2)
@@ -18,13 +18,13 @@ library(ggplot2)
 set1 <- rownames(subset(mtcars, mpg>18))
 set2 <- rownames(subset(mtcars, qsec>18))
 set3 <- rownames(subset(mtcars, cyl<5))
-carset <- list(highMpg=set1, highQsec=set2, lowCyl=set3)
-
+set4 <- rownames(subset(mtcars, wt>2.5))
+set5 <- rownames(subset(mtcars, gear==4))
+carset <- list(mpg=set1, qsec=set2, cyl=set3, wt=set4, gear=set5)
 
 ggplot2::ggplot() + geom_euler(carset)
 ```
-
-<img src="readme_files/venn3_normal.png"/>
+<img src="readme_files/venn2-5.png"/>
 
 You can change all the usual ggplot parameters and add additional layers. You can also change the position of the venn diagram with the xlim and ylim arguements.
 Note, that by default, geom_euler will force the graph to be a square. If you don't want that, specify fixedCoords=FALSE.
