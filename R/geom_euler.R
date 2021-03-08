@@ -58,7 +58,7 @@ geom_euler <- function(setlist, xlim=c(0,1), ylim=c(0,1), textsize=4, textcolor=
     params=list(...)
   )
   numbers$aes_params[["size"]] <- textsize
-  numbers$aes_params[["color"]] <- textcolor
+  numbers$aes_params[["colour"]] <- textcolor
 
   venn <- c(venn, numbers)
   ratio <- abs(diff(xlim)/diff(ylim))
