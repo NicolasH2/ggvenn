@@ -30,7 +30,7 @@
 #'
 #' ggplot2::ggplot() + geom_euler(carset)
 #'
-geom_euler <- function(setlist, textsize=4, xlim=c(0,1), ylim=c(0,1), fillCol=TRUE, borderCol=FALSE, fixedCoords=TRUE, ...){
+geom_euler <- function(setlist, xlim=c(0,1), ylim=c(0,1), textsize=4, textcolor="black", fillCol=TRUE, borderCol=FALSE, fixedCoords=TRUE, ...){
   overlap <- findOverlap(setlist, xlim=xlim, ylim=ylim)
 
   venn <- ggplot2::layer(
@@ -58,6 +58,7 @@ geom_euler <- function(setlist, textsize=4, xlim=c(0,1), ylim=c(0,1), fillCol=TR
     params=list(...)
   )
   numbers$aes_params[["size"]] <- textsize
+  numbers$aes_params[["color"]] <- textcolor
 
   venn <- c(venn, numbers)
   ratio <- abs(diff(xlim)/diff(ylim))
