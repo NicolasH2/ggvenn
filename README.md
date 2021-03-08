@@ -37,3 +37,5 @@ ggplot() + geom_euler(setlist[1:3]) +
   theme_void()
 ```
 <img src="readme_files/venn3_fill.png"/>
+
+The geom_euler function will take all parameters valid for geom_polygon and geom_text and apply them accordingly, with 2 exceptions: the size and color arguements of the text will be set via the geom_euler arguements textsize and textcolor.
