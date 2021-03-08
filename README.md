@@ -9,7 +9,7 @@ devtools::install_github("solatar/ggeuler")
 ```
 
 # Create a venn diagram
-Load the package, create your venn diagrams. ggeuler can create venn diagrams with up to 5 sets.
+Load the package, create your venn diagrams. ggeuler can create venn diagrams with up to 5 sets. A theme_void normally goes will with venn diagrams.
 ``` r
 library(ggeuler)
 library(ggplot2)
