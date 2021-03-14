@@ -31,7 +31,7 @@
 #' ggplot2::ggplot() + geom_euler(carset)
 #'
 geom_euler <- function(setlist, xlim=c(0,1), ylim=c(0,1), textsize=4, textcolor="black", fillCol=TRUE, borderCol=FALSE, fixedCoords=TRUE, ...){
-  overlap <- findOverlap(setlist, xlim=xlim, ylim=ylim)
+  overlap <- ggeuler::findOverlap(setlist, xlim=xlim, ylim=ylim)
 
   venn <- ggplot2::layer(
     data = overlap[["ellipses"]],
