@@ -36,6 +36,7 @@
 #'
 geom_euler <- function(setlist, xlim=c(0,1), ylim=c(0,1), numbersize=4, numbercolor="black", textsize=4, textcolor="black", fillCol=TRUE, borderCol=FALSE, fixedCoords=TRUE, ...){
   overlap <- ggeuler::findOverlap(setlist, xlim=xlim, ylim=ylim)
+  df <- overlap[["table"]]
   
   venn <- ggplot2::layer(
     data = overlap[["ellipses"]],
@@ -52,7 +53,7 @@ geom_euler <- function(setlist, xlim=c(0,1), ylim=c(0,1), numbersize=4, numberco
   if(!borderCol) venn$mapping[["colour"]] <- NULL
   
   numbers <- ggplot2::layer(
-    data = overlap[["table"]],
+    data = df,
     mapping = ggplot2::aes(x=x, y=y, label=size),
     geom = "text",
     stat = "identity",
@@ -61,11 +62,12 @@ geom_euler <- function(setlist, xlim=c(0,1), ylim=c(0,1), numbersize=4, numberco
     inherit.aes = FALSE,
     params=list(...)
   )
-  numbers$aes_params[["size"]] <- numbersize
-  numbers$aes_params[["colour"]] <- numbercolor
+  numbers$aes_params[["size"]] <- textsize
+  numbers$aes_params[["colour"]] <- textcolor
   
+  df <- df[!is.na(df$label),]
   circellabels <- ggplot2::layer(
-    data = overlap[["table"]],
+    data = df,
     mapping = ggplot2::aes(x=labx, y=laby, label=label),
     geom = "text",
     stat = "identity",
