@@ -13,6 +13,10 @@
 #' @param textsize integer, defining the text size of the numbers in the graph.
 #' @param xlim vector with 2 numbers, x axis limits for the venn diagram.
 #' @param ylim vector with 2 numbers, y axis limits for the venn diagram.
+#' @param numbersize number, size of the numbers on the venn diagram.
+#' @param numbercolor number, color of the numbers on the venn diagram. Set to NA to omit numbers.
+#' @param labelsize number, size of the labels on the venn diagram.
+#' @param labelcolor number, color of the labels on the venn diagram. Set to NA to omit labels.
 #' @param fillCol boolean, should the fill color indicate the list items?
 #' @param borderCol boolean, should the border color indicate the list items?
 #' @param fixedCoords boolean, should coord_fixed be applied? If TRUE, makes the graph into a square.
@@ -30,9 +34,9 @@
 #'
 #' ggplot2::ggplot() + geom_euler(carset)
 #'
-geom_euler <- function(setlist, xlim=c(0,1), ylim=c(0,1), textsize=4, textcolor="black", fillCol=TRUE, borderCol=FALSE, fixedCoords=TRUE, ...){
+geom_euler <- function(setlist, xlim=c(0,1), ylim=c(0,1), numbersize=4, numbercolor="black", textsize=4, textcolor="black", fillCol=TRUE, borderCol=FALSE, fixedCoords=TRUE, ...){
   overlap <- ggeuler::findOverlap(setlist, xlim=xlim, ylim=ylim)
-
+  
   venn <- ggplot2::layer(
     data = overlap[["ellipses"]],
     mapping = ggplot2::aes(x=x, y=y, fill=group, color=group),
@@ -46,7 +50,7 @@ geom_euler <- function(setlist, xlim=c(0,1), ylim=c(0,1), textsize=4, textcolor=
   if(!"alpha" %in% userInput & fillCol) venn$aes_params[["alpha"]] <- .4
   if(!fillCol) venn$mapping[["fill"]] <- NULL
   if(!borderCol) venn$mapping[["colour"]] <- NULL
-
+  
   numbers <- ggplot2::layer(
     data = overlap[["table"]],
     mapping = ggplot2::aes(x=x, y=y, label=size),
@@ -57,14 +61,27 @@ geom_euler <- function(setlist, xlim=c(0,1), ylim=c(0,1), textsize=4, textcolor=
     inherit.aes = FALSE,
     params=list(...)
   )
-  numbers$aes_params[["size"]] <- textsize
-  numbers$aes_params[["colour"]] <- textcolor
-
-  venn <- c(venn, numbers)
+  numbers$aes_params[["size"]] <- numbersize
+  numbers$aes_params[["colour"]] <- numbercolor
+  
+  circellabels <- ggplot2::layer(
+    data = overlap[["table"]],
+    mapping = ggplot2::aes(x=labx, y=laby, label=label),
+    geom = "text",
+    stat = "identity",
+    position = "identity",
+    show.legend = FALSE,
+    inherit.aes = FALSE,
+    params=list(...)
+  )
+  circellabels$aes_params[["size"]] <- textsize
+  circellabels$aes_params[["colour"]] <- textcolor
+  
+  venn <- c(venn, numbers, circellabels)
   ratio <- abs(diff(xlim)/diff(ylim))
   ratio <- ifelse(length(setlist)==2, ratio/1.5, ifelse(length(setlist)==4, ratio/1.2, ratio))
   if(fixedCoords) venn <- c(venn, ggplot2::coord_fixed(ratio))
-
+  
   return(venn)
 }
 
