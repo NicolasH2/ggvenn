@@ -22,7 +22,8 @@ set4 <- rownames(subset(mtcars, wt>2.5))
 set5 <- rownames(subset(mtcars, gear==4))
 carset <- list(mpg=set1, qsec=set2, cyl=set3, wt=set4, gear=set5)
 
-ggplot2::ggplot() + geom_euler(carset) +
+ggplot() + 
+  geom_euler(carset) +
   theme_void()
 ```
 <img src="readme_files/venn2-5.png"/>
