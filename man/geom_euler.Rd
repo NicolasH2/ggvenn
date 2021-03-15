@@ -6,9 +6,12 @@
 \usage{
 geom_euler(
   setlist,
-  textsize = 4,
   xlim = c(0, 1),
   ylim = c(0, 1),
+  numbersize = 4,
+  numbercolor = "black",
+  textsize = 4,
+  textcolor = "black",
   fillCol = TRUE,
   borderCol = FALSE,
   fixedCoords = TRUE,
@@ -18,11 +21,15 @@ geom_euler(
 \arguments{
 \item{setlist}{list of character vectors.}
 
-\item{textsize}{integer, defining the text size of the numbers in the graph.}
-
 \item{xlim}{vector with 2 numbers, x axis limits for the venn diagram.}
 
 \item{ylim}{vector with 2 numbers, y axis limits for the venn diagram.}
+
+\item{numbersize}{number, size of the numbers on the venn diagram.}
+
+\item{numbercolor}{number, color of the numbers on the venn diagram. Set to NA to omit numbers.}
+
+\item{textsize}{integer, defining the text size of the numbers in the graph.}
 
 \item{fillCol}{boolean, should the fill color indicate the list items?}
 
@@ -34,6 +41,10 @@ geom_euler(
 often aesthetics, used to set an aesthetic to a fixed value, like
 \code{colour = "red"} or \code{size = 3}. They may also be parameters
 to the paired geom/stat.}
+
+\item{labelsize}{number, size of the labels on the venn diagram.}
+
+\item{labelcolor}{number, color of the labels on the venn diagram. Set to NA to omit labels.}
 }
 \value{
 a ggplot2 layer objects (geom_polyon for the venn diagram) that can directly be added to a ggplot2 object

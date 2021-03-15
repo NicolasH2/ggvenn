@@ -4,7 +4,7 @@
 \alias{findOverlap}
 \title{find overlap between sets in a list}
 \usage{
-findOverlap(setlist, xlim, ylim)
+findOverlap(setlist, xlim = c(0, 1), ylim = c(0, 1))
 }
 \arguments{
 \item{setlist}{list of character vectors.}
