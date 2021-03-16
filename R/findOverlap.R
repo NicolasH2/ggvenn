@@ -1,4 +1,3 @@
-
 # devtools::document()
 
 #' find overlap between sets in a list
@@ -21,19 +20,21 @@
 #' findOverlap(carset)
 #'
 findOverlap <- function(setlist, xlim=c(0,1), ylim=c(0,1)){
+  # names of the sets must not contain points, as this will be used to distinguish them in the loop
+  names(setlist) <- gsub("\\.","_", names(setlist))
+  
+  ## iteratively compare all sets to each other. Every iteration will reach a higher level (overlap of overlaps)
   overlap <- setlist
-  for(i in 1:length(setlist)){
-    overlap <- lapply(setlist, function(x) lapply(overlap, function(y) x[x %in% y])) #compare everything
-    overlap <- unlist(overlap, recursive = F) #flatten the list
-    betterNames <- lapply(names(overlap), function(x) sort(unlist(strsplit(x, "\\."))) )
-    betterNames <- lapply(betterNames, function(x) paste( x[!duplicated(x)] , collapse="." ) ) #remove redundant comparisons
-    betternames <- unlist(betterNames)
-    overlap <- overlap[!duplicated(betterNames)]
-    betterNames <- unlist(betterNames[!duplicated(betterNames)])
+  for(i in 1:length(setlist)){# i is not used in the loop; it is just a counter
+    overlap <- lapply(setlist, function(x) lapply(overlap, function(y) x[x %in% y])) #find overlap between everything vs. everything
+    overlap <- unlist(overlap, recursive = F)
+    betterNames <- sapply(names(overlap), function(x) paste(sort(unlist(strsplit(x, "\\."))), collapse=".") ) # a list of re-sorted item names (so that redundant comparisons have the same name, e.g. a.b & b.a become a.b & a.b)
     names(overlap) <- betterNames
+    overlap <- overlap[!duplicated(names(overlap))] #remove redundant comparisons
   }
   
-  contents <- sapply(overlap, function(x) paste0(x, collapse=","))
+  ## 
+  contents <- sapply(overlap, function(x) paste(x, collapse=","))
   sizes <- sapply(overlap, length)
   groups <- unlist( lapply(betterNames, function(x) strsplit(x, "\\.")), recursive=F)
   
@@ -138,6 +139,6 @@ findOverlap <- function(setlist, xlim=c(0,1), ylim=c(0,1)){
   ycoord <- output$y
   output$x <- (xcoord * cos(r) - ycoord * sin(r)) +x
   output$y <- (ycoord * cos(r) + xcoord * sin(r)) +y
-
+  
   return( output )
 }
