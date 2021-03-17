@@ -28,7 +28,7 @@ findOverlap <- function(setlist, xlim=c(0,1), ylim=c(0,1)){
   for(i in 1:length(setlist)){# i is not used in the loop; it is just a counter
     overlap <- lapply(setlist, function(x) lapply(overlap, function(y) x[x %in% y])) #find overlap between everything vs. everything
     overlap <- unlist(overlap, recursive = F)
-    betterNames <- sapply(names(overlap), function(x) paste(sort(unlist(strsplit(x, "\\."))), collapse=".") ) # a list of re-sorted item names (so that redundant comparisons have the same name, e.g. a.b & b.a become a.b & a.b)
+    betterNames <- sapply(names(overlap), function(x) paste(sort(unique(unlist(strsplit(x, "\\."))), collapse=".")) ) # a list of re-sorted item names (so that redundant comparisons have the same name, e.g. a.b & b.a become a.b & a.b)
     names(overlap) <- betterNames
     overlap <- overlap[!duplicated(names(overlap))] #remove redundant comparisons
   }
