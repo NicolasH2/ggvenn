@@ -5,7 +5,7 @@ An [R](https://www.r-project.org) package that draws modifiable venn diagrams in
 # Installation
 Install the package from the git repository:
 ``` r
-devtools::install_github("solatar/ggeuler")
+devtools::install_github("nicolash2/ggeuler")
 ```
 
 # Create a venn diagram
