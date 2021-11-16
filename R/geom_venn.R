@@ -31,8 +31,8 @@
 #' ggplot2::ggplot() + geom_venn(carset)
 #'
 geom_venn <- function(setlist, xlim=c(0,1), ylim=c(0,1), numbersize=4, numbercolor="black", textsize=4, textcolor="black", fillCol=TRUE, borderCol=FALSE, fixedCoords=TRUE, ...){
-  # find overlap between sets, using a ggeuler function
-  overlap <- ggeuler::findOverlap(setlist, xlim=xlim, ylim=ylim)
+  # find overlap between sets, using a ggvenn function
+  overlap <- ggvenn::findOverlap(setlist, xlim=xlim, ylim=ylim)
   df <- overlap[["table"]] #table contains labels and numbers with coordinates
   ellipses <- overlap[["ellipses"]] #table contains coordinates for the ellipses to display
   
