@@ -9,7 +9,7 @@
 #' @details the function uses geom_path for the dendrogram, so ... takes all arguements that geom_path would also take, such as color, size, etc.
 #' @export
 #' @examples
-#' library(ggeuler)
+#' library(ggvenn)
 #' library(ggplot2)
 #'
 #' set1 <- rownames(subset(mtcars, mpg>18))
