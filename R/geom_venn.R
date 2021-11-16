@@ -20,7 +20,7 @@
 #' @details the function uses geom_polygon for the dendrogram, so ... takes all arguements that geom_polygon would also take, such as color, size, alpha, etc.
 #' @export
 #' @examples
-#' library(ggeuler)
+#' library(ggvenn)
 #' library(ggplot2)
 #'
 #' set1 <- rownames(subset(mtcars, mpg>18))
@@ -28,9 +28,9 @@
 #' set3 <- rownames(subset(mtcars, cyl<5))
 #' carset <- list(highMpg=set1, highQsec=set2, lowCyl=set3)
 #'
-#' ggplot2::ggplot() + geom_euler(carset)
+#' ggplot2::ggplot() + geom_venn(carset)
 #'
-geom_euler <- function(setlist, xlim=c(0,1), ylim=c(0,1), numbersize=4, numbercolor="black", textsize=4, textcolor="black", fillCol=TRUE, borderCol=FALSE, fixedCoords=TRUE, ...){
+geom_venn <- function(setlist, xlim=c(0,1), ylim=c(0,1), numbersize=4, numbercolor="black", textsize=4, textcolor="black", fillCol=TRUE, borderCol=FALSE, fixedCoords=TRUE, ...){
   # find overlap between sets, using a ggeuler function
   overlap <- ggeuler::findOverlap(setlist, xlim=xlim, ylim=ylim)
   df <- overlap[["table"]] #table contains labels and numbers with coordinates
