@@ -1,4 +1,4 @@
-Package: ggeuler
+Package: ggvenn
 Type: Package
 Title: create venn diagrams in ggplot
 Depends: R (>= 3.6.0)
